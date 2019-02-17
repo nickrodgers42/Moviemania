@@ -15,7 +15,7 @@ import {
 
 import movieService from './services/movie.service';
 
-export default class App extends Component {
+export default class ScreenTwo extends Component {
     constructor(props) {
         super(props);
 
@@ -40,12 +40,12 @@ export default class App extends Component {
     }
 
     _getMovies() {
-        movieService.getMovies()
+        movieService.getGenres()
         .then(results => {
             this.setState({ data: results });
         })
-        .catch(error => {
-            console.log('Something went wrong!');
+        .catch((error) => {
+            console.error(error);
         })
     }
 
@@ -63,7 +63,7 @@ export default class App extends Component {
     _renderItem = ({ item }) => {
         return (
             <Text style={styles.item}>
-                {item.getTitle()} {item.getYearReleased()}
+                {item.getName()} {item.getId()}
             </Text>
         );
     }

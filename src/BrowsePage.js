@@ -25,15 +25,55 @@ import {
     Title
 } from 'native-base';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-
+import movieService from './services/movie.service';
 
 
 
 export default class BrowsePage extends Component {
     constructor(props) {
         super(props);
-
+        this.state = {
+            genreList: []
+        }
         this.data = [{ val1: 'One', val2: 'Two' }, { val1: 'Three', val2: 'Four' }];
+    }
+
+    componentDidMount() {
+        this._getGenres();
+    }
+
+    _getGenres() {
+         movieService.getGenres()
+             .then(results => {
+                 this.setState({
+                     genreList: results
+                 });
+             })
+             .catch((error) => {
+                 console.error(error);
+             });
+    }
+
+    _renderGenres() {
+        return(
+            <Card
+                dataArray={this.state.genreList}
+                renderRow={(genre) => {
+                    return(
+                        <CardItem>
+                            <Text style={styles.genreText}>{genre.name}</Text>
+                            <Right>
+                                <Icon name="ios-arrow-forward" />
+                            </Right>
+                        </CardItem>
+                    );
+                }}
+            >
+                <CardItem header>
+                    <Text>Select a Genre</Text>
+                </CardItem>
+            </Card>
+        );
     }
 
     render() {
@@ -45,12 +85,13 @@ export default class BrowsePage extends Component {
                     </Left>
                     <Body>
                         <Title>
-                            Browse
+                            Browse Movies
                         </Title>
                     </Body>
                     <Right />
                 </Header>
                 <Content>
+                    {this._renderGenres()}
                     <Card>
                         <CardItem header>
                             <Text>This is the Header</Text>
@@ -122,6 +163,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#F5FCFF',
+    },
+    genreText: {
+        width: '50%',
+        fontSize: 20,
+        paddingLeft: 15
     },
     welcome: {
         fontSize: 20,

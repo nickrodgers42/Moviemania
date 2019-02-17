@@ -7,6 +7,8 @@
 //-------------------------------------------------------------------
 import apiService from './api.service';
 import { Movie } from '../models/movie';
+import { Genre } from '../models/genre';
+
 
 let MovieService = class MovieService {
 	constructor() {
@@ -27,6 +29,24 @@ let MovieService = class MovieService {
                 console.error(error);
                 reject(error);
             });
+        });
+    }
+
+    getGenres() {
+        return new Promise((resolve, reject) => {
+            fetch(apiService.getGenreList())
+                .then(( response ) => response.json() )
+                .then(( response ) => {
+                    let genres = [];
+                    response.genres.forEach(element => {
+                        genres.push(new Genre(element.name, element.id));
+                    });
+                    resolve(genres);
+                })
+                .catch((error) => {
+                    console.error(error);
+                    reject(error);
+                });
         });
     }
 };
