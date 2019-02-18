@@ -22,11 +22,8 @@ let ApiService = class ApiService {
         return `${this.apiLocation}/3/genre/movie/list?api_key=${this.apiKey}&language=${this.lang}`
     }
 
-	/*
-	* API addresses
-	*/
-	getMovieList() {
-		return `${this.apiLocation}/movies.json`;
+	getMoviesByGenre(page, genreId) {
+		return `${this.apiLocation}/3/discover/movie?api_key=${this.apiKey}&language=${this.lang}&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genreId}`
 	}
 };
 

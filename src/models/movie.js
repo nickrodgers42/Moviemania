@@ -3,16 +3,11 @@
  */
 
 export class Movie {
-    constructor(title, year) {
+    constructor(title, popularity, posterPath, releaseDate, overview) {
         this.title = title;
-        this.yearReleased = year;
-    }
-
-    getTitle() {
-        return this.title;
-    }
-
-    getYearReleased() {
-        return this.yearReleased;
+        this.popularity = popularity;
+        this.posterPath = posterPath;
+        this.releaseDate = releaseDate;
+        this.overview = overview;
     }
 }

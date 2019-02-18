@@ -13,24 +13,6 @@ import { Genre } from '../models/genre';
 let MovieService = class MovieService {
 	constructor() {
 	}
-    
-    getMovies() {
-        return new Promise((resolve, reject) => {
-            fetch(apiService.getMovieList())
-            .then((response) => response.json())
-            .then((response) => {
-                let items = [];
-                response.movies.forEach(element => {
-                    items.push(new Movie(element.title, element.releaseYear));
-                });
-                resolve(items);
-            })
-            .catch((error) => {
-                console.error(error);
-                reject(error);
-            });
-        });
-    }
 
     getGenres() {
         return new Promise((resolve, reject) => {
@@ -42,6 +24,24 @@ let MovieService = class MovieService {
                         genres.push(new Genre(element.name, element.id));
                     });
                     resolve(genres);
+                })
+                .catch((error) => {
+                    console.error(error);
+                    reject(error);
+                });
+        });
+    }
+
+    getMoviesByGenreId(page, genreId) {
+        return new Promise((resolve, reject) => {
+            fetch(apiService.getMoviesByGenre(page, genreId))
+                .then(( response ) => response.json() )
+                .then(( response ) => {
+                    let movies = [];
+                    response.results.forEach(element => {
+                        movies.push(new Movie(element.title, element.popularity, element.poster_path, element.release_date, element.overview))
+                    });
+                    resolve(movies);
                 })
                 .catch((error) => {
                     console.error(error);

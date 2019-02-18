@@ -8,6 +8,7 @@ import React, { Component } from 'react';
 import {
     Alert,
     Platform,
+    ScrollView, 
     StyleSheet,
     View
 } from 'react-native';
@@ -32,12 +33,25 @@ import movieService from './services/movie.service';
 
 
 export default class BrowsePage extends Component {
+    static navigationOptions = {
+        header: <Header>
+                    <Left>
+                        <MaterialIcons size={25} name='theaters' />
+                    </Left>
+                    <Body>
+                        <Title>
+                            Browse Movies
+                        </Title>
+                    </Body>
+                    <Right />
+                </Header>
+    }
+
     constructor(props) {
         super(props);
         this.state = {
             genreList: []
         }
-        this.data = [{ val1: 'One', val2: 'Two' }, { val1: 'Three', val2: 'Four' }];
     }
 
     componentDidMount() {
@@ -63,7 +77,7 @@ export default class BrowsePage extends Component {
                 renderRow={(genre) => {
                     return (
                         <ListItem
-                            onPress = {() => console.log("pressed " + genre.name)}
+                            onPress = {() => {this.props.navigation.navigate('CategoryPage', {genre: genre.name, genreId: genre.id}); }}
                         >
                             <Text style={styles.genreText}>{genre.name}</Text>
                             <Right>
@@ -79,17 +93,6 @@ export default class BrowsePage extends Component {
     render() {
         return (
             <Container>
-                <Header>
-                    <Left>
-                        <MaterialIcons size={25} name='theaters' />
-                    </Left>
-                    <Body>
-                        <Title>
-                            Browse Movies
-                        </Title>
-                    </Body>
-                    <Right />
-                </Header>
                 <Content>
                     <Card>
                         <CardItem header>

@@ -15,6 +15,22 @@ import BrowsePage from './BrowsePage';
 import ScreenTwo from './ScreenTwo';
 import CategoryPage from './CategoryPage';
 
+import {
+    Body,
+    Card,
+    CardItem,
+    Container,
+    Content,
+    Header,
+    Icon,
+    Left,
+    Right,
+    Text,
+    Title,
+    List,
+    ListItem
+} from 'native-base';
+
 export default class App extends Component {
     render() {
         return (
@@ -23,9 +39,14 @@ export default class App extends Component {
     }
 }
 
+const BrowseTab = createStackNavigator({
+    BrowsePage: BrowsePage,
+    CategoryPage: CategoryPage
+})
+
 const Root = createBottomTabNavigator(
     {
-        Browse: BrowsePage,
+        Browse: BrowseTab,
         Search: ScreenTwo
     },
     {
