@@ -13,6 +13,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import BrowsePage from './BrowsePage';
 import ScreenTwo from './ScreenTwo';
+import CategoryPage from './CategoryPage';
 
 export default class App extends Component {
     render() {

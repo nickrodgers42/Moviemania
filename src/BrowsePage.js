@@ -22,7 +22,9 @@ import {
     Left,
     Right,
     Text,
-    Title
+    Title,
+    List,
+    ListItem
 } from 'native-base';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import movieService from './services/movie.service';
@@ -56,23 +58,21 @@ export default class BrowsePage extends Component {
 
     _renderGenres() {
         return(
-            <Card
+            <List
                 dataArray={this.state.genreList}
                 renderRow={(genre) => {
-                    return(
-                        <CardItem>
+                    return (
+                        <ListItem
+                            onPress = {() => console.log("pressed " + genre.name)}
+                        >
                             <Text style={styles.genreText}>{genre.name}</Text>
                             <Right>
-                                <Icon name="ios-arrow-forward" />
+                                <Icon name="arrow-forward" />
                             </Right>
-                        </CardItem>
+                        </ListItem>
                     );
                 }}
-            >
-                <CardItem header>
-                    <Text>Select a Genre</Text>
-                </CardItem>
-            </Card>
+            ></List>
         );
     }
 
@@ -91,52 +91,12 @@ export default class BrowsePage extends Component {
                     <Right />
                 </Header>
                 <Content>
-                    {this._renderGenres()}
                     <Card>
                         <CardItem header>
-                            <Text>This is the Header</Text>
-                        </CardItem>
-                        <CardItem cardBody>
-                            <Text>
-                                This is the body of the card. It contains the main text
-                                that you want to display.
-                            </Text>
-                        </CardItem>
-                        <CardItem footer>
-                            <Text>This is the footer</Text>
-                        </CardItem>
-                    </Card>
-                    <Card>
-                        <CardItem 
-                            button
-                            onPress={()=>this.launchAlert()}
-                        >
-                            <Icon active name="ios-american-football" />
-                            <Text>Football</Text>
-                            <Right>
-                                <Icon name="ios-arrow-forward" />
-                            </Right>
-                        </CardItem>
-                    </Card>
-                    <Card
-                        dataArray={this.data}
-                        renderRow={(item) => <CardItem><Text>{item.val1} and {item.val2}</Text></CardItem>}
-                    >
-                    </Card>
-                    <Card>
-                        <CardItem>
-                            <Icon active name="ios-boat" />
-                            <Text>Boating</Text>
-                            <Right>
-                                <Icon name="ios-arrow-forward" />
-                            </Right>
+                            <Text>Select a Genre</Text>
                         </CardItem>
                         <CardItem>
-                            <Icon active name="ios-build" />
-                            <Text>Two CardItems in one Card</Text>
-                            <Right>
-                                <Icon name="ios-arrow-forward" />
-                            </Right>
+                            {this._renderGenres()}
                         </CardItem>
                     </Card>
                 </Content>
@@ -165,9 +125,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#F5FCFF',
     },
     genreText: {
-        width: '50%',
         fontSize: 20,
-        paddingLeft: 15
+        width: "85%"
     },
     welcome: {
         fontSize: 20,
