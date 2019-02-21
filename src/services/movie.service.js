@@ -6,8 +6,8 @@
 //
 //-------------------------------------------------------------------
 import apiService from './api.service';
-import { Movie } from '../models/movie';
-import { Genre } from '../models/genre';
+import { MovieSummary } from '../models/MovieSummary';
+import { Genre } from '../models/Genre';
 
 
 let MovieService = class MovieService {
@@ -39,7 +39,7 @@ let MovieService = class MovieService {
                 .then(( response ) => {
                     let movies = [];
                     response.results.forEach(element => {
-                        movies.push(new Movie(element.title, element.popularity, element.poster_path, element.release_date, element.overview))
+                        movies.push(new MovieSummary(element.id, element.title, element.popularity, element.poster_path, element.backdrop_path, element.release_date, element.overview))
                     });
                     resolve(movies);
                 })

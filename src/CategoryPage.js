@@ -32,7 +32,7 @@ import {
 } from 'native-base';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import movieService from './services/movie.service';
-
+import MovieSummary from './MovieSummary';
 
 
 export default class CategoryPage extends Component {
@@ -82,63 +82,28 @@ export default class CategoryPage extends Component {
 
     _renderItem = ({ item }) => {
         return (
-            <Card>
-                <CardItem>
-                    <Text>{item.title}</Text>
-                </CardItem>
-            </Card>
+            <MovieSummary
+                movie={item}
+            />
         );
     }
 
-    _keyExtractor = (item, index) => { 
-        let key = this.key;
-        this.key += 1;
-        return key;
-     }
+    _keyExtractor = (item, index) => item.id.toString();
     
     render() {
         return (
             <Container>
-                <Content>
-                    <Card>
-                        <CardItem header>
-                            <Text>New Page</Text>
-                        </CardItem>
-                    </Card>
-                    <FlatList
-                        data={this.state.movies}
-                        renderItem={this._renderItem}
-                        keyExtractor={this._keyExtractor}
-                        contentContainerStyle={{ flexGrow: 1 }}
-                        onEndReachedThreshold={50}
-                        onEndReached={this._getMovies.bind(this)}
-                    >
-                    </FlatList>
-                </Content>
+                <FlatList
+                    data={this.state.movies}
+                    renderItem={this._renderItem}
+                    keyExtractor={this._keyExtractor}
+                    contentContainerStyle={{ flexGrow: 1 }}
+                    onEndReached={() => this._getMovies()}
+                    onEndReachedThreshold={0.5}
+                >
+                </FlatList>
             </Container>
         );
     }
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F5FCFF',
-    },
-    genreText: {
-        fontSize: 20,
-        width: "85%"
-    },
-    welcome: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 10,
-    },
-    instructions: {
-        textAlign: 'center',
-        color: '#333333',
-        marginBottom: 5,
-    },
-});
