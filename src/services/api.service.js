@@ -25,6 +25,14 @@ let ApiService = class ApiService {
 	getMoviesByGenre(page, genreId) {
 		return `${this.apiLocation}/3/discover/movie?api_key=${this.apiKey}&language=${this.lang}&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genreId}`
 	}
+
+	getMovieDetail(movieId) {
+		return `${this.apiLocation}/3/movie/${movieId}?api_key=${this.apiKey}&language=${this.lang}`
+	}
+
+	getMovieCast(movieId) {
+		return `${this.apiLocation}/3/movie/${movieId}/credits?api_key=${this.apiKey}`
+	}
 };
 
 // Create a Singleton

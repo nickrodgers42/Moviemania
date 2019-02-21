@@ -1,5 +1,5 @@
 /*
- * Class to describe a single Movie
+ * Class to describe a single Movie Summary
  */
 
 export class MovieSummary {

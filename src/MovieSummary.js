@@ -54,11 +54,18 @@ export default class MovieSummary extends Component {
         });
     }
 
+    formatDate(dateStr) {
+        year = dateStr.substring(0, 4);
+        month = dateStr.substring(5,7);
+        day = dateStr.substring(8,10);
+        return month + '/' + day + '/' + year.substring(2);
+    }
+
     render() {
         let win = Dimensions.get('window');
         return (
             <Card>
-                <CardItem>
+                <CardItem button onPress={() => {this.props.navigation.navigate('MovieDetailPage', {movie: this.props.movie})}}>
                     <Left>
                         <Thumbnail large square source={{uri: 'https://image.tmdb.org/t/p/w200' + this.props.movie.posterPath}} />
                         <Body>
@@ -69,21 +76,32 @@ export default class MovieSummary extends Component {
                 </CardItem>
                 <CardItem>
                     <Body>
-                        <Image source={{uri: 'https://image.tmdb.org/t/p/w500' + this.props.movie.backdropPath}} style={{width: win.width-50, height: 200, flex: 1}} ImageResizeMode='cover' />
-                        <Text style={{paddingTop: 20}}>{!this.state.readMore && this.props.movie.overview.length > 180 ? this.props.movie.overview.substring(0, 180) + '...'  : this.props.movie.overview}</Text>
+                        <Image
+                            source={{uri: 'https://image.tmdb.org/t/p/w500' + this.props.movie.backdropPath}}
+                            style={{width: win.width-50, height: 200, flex: 1}}
+                            resizeMode='cover' 
+                        />
+                        <Text style={{paddingTop: 20}}>{!this.state.readMore && this.props.movie.overview.length > 120 ? this.props.movie.overview.substring(0, 120) + '...'  : this.props.movie.overview}</Text>
                         <Button small primary transparent onPress={() => this.readMore()}>
-                        {!this.state.readMore && this.props.movie.overview.length > 180 ?
+                        {!this.state.readMore && this.props.movie.overview.length > 120 ?
                             <Text note style={{textAlign: 'auto', textDecorationLine: 'underline'}}>Read More</Text>
                         :
+                            null
+                        }
+                        {this.state.readMore && this.props.movie.overview.length > 120 ?
                             <Text note style={{textAlign: 'auto', textDecorationLine: 'underline'}}>Show Less</Text>
+                        :
+                            null
                         }
                         </Button> 
                     </Body>
                 </CardItem>
                 <CardItem>
-                    <Left />
+                    <Left>
+                        <Text note>Released {this.formatDate(this.props.movie.releaseDate)}</Text>
+                    </Left>
                     <Right>
-                        <Button>
+                        <Button onPress={() => {this.props.navigation.navigate('MovieDetailPage', {movie: this.props.movie})}}>
                             <Text>More Details</Text>
                         </Button>
                     </Right>

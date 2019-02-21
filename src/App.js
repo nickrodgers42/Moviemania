@@ -14,6 +14,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import BrowsePage from './BrowsePage';
 import ScreenTwo from './ScreenTwo';
 import CategoryPage from './CategoryPage';
+import MovieDetailPage from './MovieDetail';
 
 import {
     Body,
@@ -41,7 +42,8 @@ export default class App extends Component {
 
 const BrowseTab = createStackNavigator({
     BrowsePage: BrowsePage,
-    CategoryPage: CategoryPage
+    CategoryPage: CategoryPage,
+    MovieDetailPage: MovieDetailPage
 })
 
 const Root = createBottomTabNavigator(

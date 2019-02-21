@@ -19,6 +19,7 @@ import {
     Body,
     Card,
     CardItem,
+    Button,
     Container,
     Content,
     Header,
@@ -40,9 +41,9 @@ export default class CategoryPage extends Component {
         return {
             header: <Header>
                         <Left>
-                            <TouchableOpacity>
-                                <Icon size={25} name='arrow-back' onPress={ () => { navigation.goBack() }} />
-                            </TouchableOpacity>
+                            <Button iconLeft transparent onPress={ () => { navigation.goBack() }}>
+                                <Icon name='arrow-back'></Icon>
+                            </Button>
                         </Left>
                         <Body style={{flex: 3}}>
                             <Title>
@@ -83,6 +84,7 @@ export default class CategoryPage extends Component {
     _renderItem = ({ item }) => {
         return (
             <MovieSummary
+                navigation={this.props.navigation}
                 movie={item}
             />
         );
