@@ -15,6 +15,7 @@ import BrowsePage from './BrowsePage';
 import ScreenTwo from './ScreenTwo';
 import CategoryPage from './CategoryPage';
 import MovieDetailPage from './MovieDetail';
+import SearchPage from './SearchPage';
 import PersonDetailPage from './PersonDetail';
 
 import {
@@ -48,10 +49,14 @@ const BrowseTab = createStackNavigator({
     PersonDetailPage: PersonDetailPage
 })
 
+const SearchTab = createStackNavigator({
+    SearchPage: SearchPage
+})
+
 const Root = createBottomTabNavigator(
     {
         Browse: BrowseTab,
-        Search: ScreenTwo
+        Search: SearchTab,
     },
     {
         defaultNavigationOptions: ({ navigation }) => ({

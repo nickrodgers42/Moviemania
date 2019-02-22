@@ -96,18 +96,6 @@ export default class BrowsePage extends Component {
             </Container>
         );
     }
-
-    launchAlert() {
-        Alert.alert(
-          'This is an Alert',
-          'This is the Alert message',
-          [
-            {text: 'Cancel', onPress: () => console.log('Cancel Pressed')},
-            {text: 'OK', onPress: () => console.log('OK Pressed')},
-          ],
-          { cancelable: false }
-        );
-      }
 }
 
 const styles = StyleSheet.create({

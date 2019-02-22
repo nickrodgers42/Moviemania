@@ -48,7 +48,7 @@ export default class CastCard extends Component {
     render() {
         let win = Dimensions.get('window');        
         return (
-            <Card>
+            <Card style={{width: win.width * 0.4}}>
                 <CardItem 
                     button 
                     onPress={() => (this.props.navigation.push('PersonDetailPage', {actorId: this.props.castMember.id, actor: this.props.castMember.name}))}   
@@ -60,7 +60,7 @@ export default class CastCard extends Component {
                             resizeMode='contain'
                         />
                         <Text>{this.props.castMember.name}</Text>
-                        <Text note>{this.props.castMember.character}</Text>
+                        <Text note>{this.props.castMember.character.substring(0, 120)}</Text>
                     </Body>
                 </CardItem>
             </Card>

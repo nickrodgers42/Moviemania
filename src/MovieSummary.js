@@ -55,10 +55,15 @@ export default class MovieSummary extends Component {
     }
 
     formatDate(dateStr) {
-        year = dateStr.substring(0, 4);
-        month = dateStr.substring(5,7);
-        day = dateStr.substring(8,10);
-        return month + '/' + day + '/' + year.substring(2);
+        if (dateStr != null) {
+            year = dateStr.substring(0, 4);
+            month = dateStr.substring(5,7);
+            day = dateStr.substring(8,10);
+            return month + '/' + day + '/' + year.substring(2);
+        }
+        else {
+            return '';
+        }
     }
 
     render() {
