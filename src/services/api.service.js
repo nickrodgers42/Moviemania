@@ -33,6 +33,10 @@ let ApiService = class ApiService {
 	getMovieCast(movieId) {
 		return `${this.apiLocation}/3/movie/${movieId}/credits?api_key=${this.apiKey}`
 	}
+
+	getPersonDetail(id) {
+		return `${this.apiLocation}/3/person/${id}?api_key=${this.apiKey}&language=${this.lang}`
+	}
 };
 
 // Create a Singleton

@@ -58,6 +58,7 @@ let MovieService = class MovieService {
                 .then(( response ) => {
                     let a = response;
                     let movie = new MovieDetail(a.id, a.title, a.popularity, a.poster_path, a.backdrop_path, a.release_date, a.overview, a.genres, a.budget, a.revenue, a.status);
+                    console.log(movie);
                     resolve(movie);
                 })
                 .catch(( error ) => {
@@ -77,6 +78,25 @@ let MovieService = class MovieService {
                         cast.push(new CastMember(element.id, element.name, element.character, element.profile_path));
                     })
                     resolve(cast);
+                })
+                .catch( (error) => {
+                    console.error(error);
+                    reject(error);
+                })
+        });
+    }
+
+    getPersonDetail(id) {
+        console.log('get Person' + id);
+        return new Promise( (resolve, reject) => {
+            fetch(apiService.getPersonDetail(id)) 
+                .then( (response) => response.json() )
+                .then( (response) => {
+                    let a = response;
+                    console.log(a);
+                    let person = PersonDetail(a.id, a.name, a.popularity, a.profilePath, a.birthday, a.deathday, a.place_of_birth, a.biography);
+                    console.log(person);
+                    resolve(person);
                 })
                 .catch( (error) => {
                     console.error(error);

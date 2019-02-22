@@ -31,6 +31,8 @@ import {
     ListItem
 } from 'native-base';
 import movieService from './services/movie.service';
+import CastCard from './CastCard';
+import GenreList from './GenreList';
 
 export default class MovieDetailPage extends Component {
         static navigationOptions = ({navigation}) => { 
@@ -55,6 +57,7 @@ export default class MovieDetailPage extends Component {
         super(props);
         this.state = {
             fetchedMovie: false,
+            fetchedCast: false,
             movie: {},
             cast: []
         }
@@ -78,9 +81,21 @@ export default class MovieDetailPage extends Component {
         movieService.getMovieCast(this.props.navigation.getParam('movie', '').id)
             .then( (results) => {
                 this.setState({
+                    fetchedCast: true,
                     cast: results
                 });
             })
+    }
+
+    _castKeyExtractor = (item, index) => item.id.toString();
+
+    _renderCastMember = ({ item }) => {
+        return(
+            <CastCard 
+                castMember={item}
+                navigation={this.props.navigation}
+            />
+        );
     }
 
     formatDate(dateStr) {
@@ -88,6 +103,16 @@ export default class MovieDetailPage extends Component {
         month = dateStr.substring(5,7);
         day = dateStr.substring(8,10);
         return month + '/' + day + '/' + year.substring(2);
+    }
+
+    
+    _renderGenres() {
+        return(
+            <GenreList
+                navigation={this.props.navigation}
+                genres={this.state.movie.genres}
+            />
+        );
     }
 
     render() {
@@ -114,13 +139,39 @@ export default class MovieDetailPage extends Component {
                                     style={{width: win.width-50, height: 350}} 
                                     resizeMode='contain'
                                 />
-                                <Text style={{paddingTop: 20}}>{this.state.movie.overview}</Text>
+                            </Body>
+                        </CardItem>
+                        <CardItem>
+                            <Body>
+                                <Text>{this.state.movie.overview}</Text>
                                 <Text>Release Date: {this.formatDate(this.state.movie.releaseDate)}</Text>
                                 <Text>Budget: ${this.state.movie.budget}</Text>
                                 <Text>Revenue: ${this.state.movie.revenue}</Text>
                                 <Text>Status: {this.state.movie.status}</Text>
                             </Body>
                         </CardItem>
+                        <CardItem header>
+                            <Text>Cast</Text>
+                        </CardItem>
+                        {this.state.fetchedCast ? 
+                            <CardItem>
+                                <Body>
+                                    <FlatList
+                                        data={this.state.cast}
+                                        renderItem={this._renderCastMember}
+                                        keyExtractor={this._castKeyExtractor}
+                                        contentContainerStyle={{ flexGrow: 1 }}
+                                        horizontal={true}
+                                    >
+                                    </FlatList>
+                                </Body>
+                            </CardItem>
+                        : null
+                        }
+                        <CardItem header>
+                            <Text>Genres</Text>
+                        </CardItem>
+                        {this._renderGenres()}
                     </Card>
                 :
                 null

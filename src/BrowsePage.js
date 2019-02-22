@@ -29,6 +29,7 @@ import {
 } from 'native-base';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import movieService from './services/movie.service';
+import GenreList from './GenreList'
 
 
 
@@ -72,21 +73,10 @@ export default class BrowsePage extends Component {
 
     _renderGenres() {
         return(
-            <List
-                dataArray={this.state.genreList}
-                renderRow={(genre) => {
-                    return (
-                        <ListItem
-                            onPress = {() => {this.props.navigation.navigate('CategoryPage', {genre: genre.name, genreId: genre.id}); }}
-                        >
-                            <Text style={styles.genreText}>{genre.name}</Text>
-                            <Right>
-                                <Icon name="arrow-forward" />
-                            </Right>
-                        </ListItem>
-                    );
-                }}
-            ></List>
+            <GenreList
+                navigation={this.props.navigation}
+                genres={this.state.genreList}
+            />
         );
     }
 

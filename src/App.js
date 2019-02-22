@@ -15,6 +15,7 @@ import BrowsePage from './BrowsePage';
 import ScreenTwo from './ScreenTwo';
 import CategoryPage from './CategoryPage';
 import MovieDetailPage from './MovieDetail';
+import PersonDetailPage from './PersonDetail';
 
 import {
     Body,
@@ -43,7 +44,8 @@ export default class App extends Component {
 const BrowseTab = createStackNavigator({
     BrowsePage: BrowsePage,
     CategoryPage: CategoryPage,
-    MovieDetailPage: MovieDetailPage
+    MovieDetailPage: MovieDetailPage,
+    PersonDetailPage: PersonDetailPage
 })
 
 const Root = createBottomTabNavigator(

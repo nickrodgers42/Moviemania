@@ -65,7 +65,7 @@ export default class MovieSummary extends Component {
         let win = Dimensions.get('window');
         return (
             <Card>
-                <CardItem button onPress={() => {this.props.navigation.navigate('MovieDetailPage', {movie: this.props.movie})}}>
+                <CardItem button onPress={() => {this.props.navigation.push('MovieDetailPage', {movie: this.props.movie})}}>
                     <Left>
                         <Thumbnail large square source={{uri: 'https://image.tmdb.org/t/p/w200' + this.props.movie.posterPath}} />
                         <Body>
@@ -101,7 +101,7 @@ export default class MovieSummary extends Component {
                         <Text note>Released {this.formatDate(this.props.movie.releaseDate)}</Text>
                     </Left>
                     <Right>
-                        <Button onPress={() => {this.props.navigation.navigate('MovieDetailPage', {movie: this.props.movie})}}>
+                        <Button onPress={() => {this.props.navigation.push('MovieDetailPage', {movie: this.props.movie})}}>
                             <Text>More Details</Text>
                         </Button>
                     </Right>
