@@ -6,11 +6,7 @@
 
 import React, { Component } from 'react';
 import {
-    Alert,
-    Platform,
-    ScrollView, 
     StyleSheet,
-    View
 } from 'react-native';
 import {
     Body,
@@ -19,19 +15,14 @@ import {
     Container,
     Content,
     Header,
-    Icon,
     Left,
     Right,
     Text,
     Title,
-    List,
-    ListItem
 } from 'native-base';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import movieService from './services/movie.service';
 import GenreList from './GenreList'
-
-
 
 export default class BrowsePage extends Component {
     static navigationOptions = {
@@ -97,26 +88,3 @@ export default class BrowsePage extends Component {
         );
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F5FCFF',
-    },
-    genreText: {
-        fontSize: 20,
-        width: "85%"
-    },
-    welcome: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 10,
-    },
-    instructions: {
-        textAlign: 'center',
-        color: '#333333',
-        marginBottom: 5,
-    },
-});

@@ -8,9 +8,7 @@ import React, { Component } from 'react';
 import {
     Dimensions,
     Image,
-    Platform,
     StyleSheet,
-    View,
     FlatList
 } from 'react-native';
 
@@ -27,11 +25,8 @@ import {
     Right,
     Text,
     Title,
-    List,
-    ListItem
 } from 'native-base';
 import personService from './services/person.service';
-import CastCard from './CastCard';
 import MovieSummary from './MovieSummary';
 import Styles from './Stylesheet';
 
@@ -207,22 +202,3 @@ export default class PersonDetailPage extends Component {
         );
     }
 }
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F5FCFF',
-    },
-    title: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 10,
-        marginTop: 40
-    },
-    item: {
-        textAlign: 'center',
-        color: '#333333',
-        marginBottom: 5,
-    },
-});

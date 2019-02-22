@@ -19,22 +19,6 @@ import SearchPage from './SearchPage';
 import PersonDetailPage from './PersonDetail';
 import PersonSearchResults from './PersonSearchResults';
 
-import {
-    Body,
-    Card,
-    CardItem,
-    Container,
-    Content,
-    Header,
-    Icon,
-    Left,
-    Right,
-    Text,
-    Title,
-    List,
-    ListItem
-} from 'native-base';
-
 export default class App extends Component {
     render() {
         return (

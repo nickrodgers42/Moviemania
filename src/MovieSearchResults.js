@@ -6,14 +6,7 @@
 
 import React, { Component } from 'react';
 import {
-    Alert,
-    Platform,
-    TouchableOpacity,
-    ScrollView,
     FlatList,
-    RefreshControl,
-    StyleSheet,
-    View
 } from 'react-native';
 import {
     Body,
@@ -21,17 +14,13 @@ import {
     CardItem,
     Button,
     Container,
-    Content,
     Header,
     Icon,
     Left,
     Right,
     Text,
     Title,
-    List,
-    ListItem
 } from 'native-base';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import movieService from './services/movie.service';
 import MovieSummary from './MovieSummary';
 import Styles from './Stylesheet';

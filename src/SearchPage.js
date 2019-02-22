@@ -6,16 +6,8 @@
 
 import React, { Component } from 'react';
 import {
-    Alert,
-    Platform,
-    ScrollView, 
-    StyleSheet,
-    View
-} from 'react-native';
-import {
     Body,
     Card,
-    CardItem,
     Container,
     Button,
     Content,
@@ -24,19 +16,12 @@ import {
     Input,
     Header,
     Picker,
-    Icon,
     Left,
     Right,
     Text,
     Title,
-    List,
-    ListItem
 } from 'native-base';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import movieService from './services/movie.service';
-import GenreList from './GenreList'
-
-
 
 export default class SearchPage extends Component {
     static navigationOptions = {

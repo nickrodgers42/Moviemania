@@ -6,14 +6,7 @@
 
 import React, { Component } from 'react';
 import {
-    Alert,
-    Platform,
-    TouchableOpacity,
-    ScrollView,
     FlatList,
-    RefreshControl,
-    StyleSheet,
-    View
 } from 'react-native';
 import {
     Body,
@@ -21,19 +14,15 @@ import {
     CardItem,
     Button,
     Container,
-    Content,
     Header,
     Icon,
     Left,
     Right,
     Text,
     Title,
-    List,
-    ListItem
 } from 'native-base';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import personService from './services/person.service';
-import PersonCard from './PersonCard';
+import PersonSummary from './PersonSummary';
 import Styles from './Stylesheet';
 
 
@@ -92,7 +81,7 @@ export default class CategoryPage extends Component {
 
     _renderItem = ({ item }) => {
         return (
-            <PersonCard
+            <PersonSummary
                 navigation={this.props.navigation}
                 person={item}
             />

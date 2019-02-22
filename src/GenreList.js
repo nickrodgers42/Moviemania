@@ -8,37 +8,16 @@ import React, {
     Component
 } from 'react';
 import {
-    Alert,
-    Platform,
-    TouchableOpacity,
-    Image,
     Dimensions,
-    ScrollView,
-    FlatList,
-    RefreshControl,
-    StyleSheet,
-    View
 } from 'react-native';
 import {
-    Body,
-    Button,
-    Card,
-    CardItem,
-    Container,
-    Content,
-    Header,
     Icon,
     Left,
     Right,
     Text,
-    Title,
-    Thumbnail,
     List,
     ListItem
 } from 'native-base';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import movieService from './services/movie.service';
-
 
 export default class CastCard extends Component {
     constructor(props) {
