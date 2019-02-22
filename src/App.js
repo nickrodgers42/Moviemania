@@ -18,6 +18,7 @@ import MovieSearchResults from './MovieSearchResults';
 import MovieDetailPage from './MovieDetail';
 import SearchPage from './SearchPage';
 import PersonDetailPage from './PersonDetail';
+import PersonSearchResults from './PersonSearchResults';
 
 import {
     Body,
@@ -53,6 +54,9 @@ const BrowseTab = createStackNavigator({
 const SearchTab = createStackNavigator({
     SearchPage: SearchPage,
     MovieSearchResults: MovieSearchResults,
+    PersonSearchResults: PersonSearchResults,
+    MovieDetailPage: MovieDetailPage,
+    PersonDetailPage: PersonDetailPage
 })
 
 const Root = createBottomTabNavigator(

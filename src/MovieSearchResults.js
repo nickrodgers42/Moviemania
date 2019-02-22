@@ -47,7 +47,7 @@ export default class CategoryPage extends Component {
                         </Left>
                         <Body style={{flex: 3}}>
                             <Title>
-                                '{navigation.getParam('query', '')}' Search Results
+                                 Search Results for '{navigation.getParam('query', '')}'
                             </Title>
                         </Body>
                         <Right />
@@ -79,7 +79,8 @@ export default class CategoryPage extends Component {
                         movies: results.movies,
                         totalResults: results.totalResults,
                         totalPages: results.totalPages,      
-                        fetchedSearchResults: true  
+                        fetchedSearchResults: true,
+                        page: this.state.page + 1
                     })
                 })
                 .catch( (error) => {
