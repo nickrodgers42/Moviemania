@@ -41,6 +41,16 @@ let ApiService = class ApiService {
 	getPersonCredits(id) {
 		return `${this.apiLocation}/3/person/${id}/movie_credits?api_key=${this.apiKey}&language=${this.lang}`
 	}
+
+	getMovieSearchResults(query, page) {
+		encodedQuery = encodeURIComponent(query);
+		return `${this.apiLocation}/3/search/movie?api_key=${this.apiKey}&language=${this.lang}&query=${encodedQuery}&page=${page}&include_adult=false`
+	}
+
+	getPersonSearchResults(query, page) {
+		encodedQuery = encodeURIComponent(query);
+		return `${this.apiLocation}/3/search/person?api_key=${this.apiKey}&language=${this.lang}&query=${encodedQuery}&page=${page}&include_adult=false`
+	}
 };
 
 // Create a Singleton

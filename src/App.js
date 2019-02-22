@@ -14,6 +14,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import BrowsePage from './BrowsePage';
 import ScreenTwo from './ScreenTwo';
 import CategoryPage from './CategoryPage';
+import MovieSearchResults from './MovieSearchResults';
 import MovieDetailPage from './MovieDetail';
 import SearchPage from './SearchPage';
 import PersonDetailPage from './PersonDetail';
@@ -50,7 +51,8 @@ const BrowseTab = createStackNavigator({
 })
 
 const SearchTab = createStackNavigator({
-    SearchPage: SearchPage
+    SearchPage: SearchPage,
+    MovieSearchResults: MovieSearchResults,
 })
 
 const Root = createBottomTabNavigator(

@@ -86,18 +86,22 @@ let MovieService = class MovieService {
         });
     }
 
-    getPersonDetail(id) {
+    getMovieSearchResults(query, page) {
         return new Promise( (resolve, reject) => {
-            fetch(apiService.getPersonDetail(id)) 
+            fetch(apiService.getMovieSearchResults(query, page))
                 .then( (response) => response.json() )
                 .then( (response) => {
-                    let a = response;
-                    let person = PersonDetail(a.id, a.name, a.popularity, a.profilePath, a.birthday, a.deathday, a.place_of_birth, a.biography);
-                    resolve(person);
-                })
-                .catch( (error) => {
-                    console.error(error);
-                    reject(error);
+                    let movies = [];
+                    let totalResults = response.total_results;
+                    let totalPages = response.total_pages;
+                    response.results.forEach((element) => {
+                        movies.push(new MovieSummary(element.id, element.title, element.popularity, element.poster_path, element.backdrop_path, element.release_date, element.overview, null))
+                    });
+                    resolve({
+                        movies: movies,
+                        totalResults: totalResults,
+                        totalPages: totalPages
+                    })
                 })
         });
     }

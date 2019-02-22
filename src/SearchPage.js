@@ -74,6 +74,14 @@ export default class SearchPage extends Component {
         }
     }
 
+    handleOnPress() {
+        if (this.state.searchBy === 'Movies') {
+            this.props.navigation.push('MovieSearchResults', {query: this.state.searchVal})
+        }
+        else {
+            this.props.navigation.push('PersonSearchResults', {query: this.state.searchVal})
+        }
+    }
 
     render() {
         return (
@@ -92,7 +100,7 @@ export default class SearchPage extends Component {
                                     <Picker.Item label='People' value='People' />
                                 </Picker>
                             </Item>
-                            <Item rounded>
+                            <Item>
                                 <MaterialIcons size={25} name='search' />
                                 <Input placeholder={'Search ' + this.state.searchBy} 
                                     onChangeText={(value) => {
@@ -102,7 +110,12 @@ export default class SearchPage extends Component {
                                     }}
                                 />
                             </Item>
-                            <Button full>
+                            <Button 
+                                iconLeft
+                                full
+                                onPress={() => {this.handleOnPress()}}
+                            >
+                                <MaterialIcons size={25} name='search' />
                                 <Text>Search</Text>
                             </Button>
                         </Form>
