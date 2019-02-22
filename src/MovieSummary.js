@@ -63,13 +63,30 @@ export default class MovieSummary extends Component {
 
     render() {
         let win = Dimensions.get('window');
+        let cardStyle={};
+        let imgStyle={width: win.width-50, height: 200, flex: 1}; 
+        if (this.props.narrow) {
+            cardStyle={
+                width: win.width*0.85
+            }
+            imgStyle={
+                width: win.width*0.85 - 50,
+                height: 200,
+                flex: 1
+            }
+        }
         return (
-            <Card>
+            <Card style={cardStyle}>
                 <CardItem button onPress={() => {this.props.navigation.push('MovieDetailPage', {movie: this.props.movie})}}>
                     <Left>
                         <Thumbnail large square source={{uri: 'https://image.tmdb.org/t/p/w200' + this.props.movie.posterPath}} />
                         <Body>
                             <Text>{this.props.movie.title}</Text>
+                            {this.props.movie.character != null ?
+                                <Text note>{this.props.movie.character}</Text>
+                            :
+                                null
+                            }
                             <Text note>Popularity: {this.props.movie.popularity}</Text>
                         </Body>
                     </Left>
@@ -78,7 +95,7 @@ export default class MovieSummary extends Component {
                     <Body>
                         <Image
                             source={{uri: 'https://image.tmdb.org/t/p/w500' + this.props.movie.backdropPath}}
-                            style={{width: win.width-50, height: 200, flex: 1}}
+                            style={imgStyle}
                             resizeMode='cover' 
                         />
                         <Text style={{paddingTop: 20}}>{!this.state.readMore && this.props.movie.overview.length > 120 ? this.props.movie.overview.substring(0, 120) + '...'  : this.props.movie.overview}</Text>

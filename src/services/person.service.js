@@ -7,20 +7,18 @@
 //-------------------------------------------------------------------
 import apiService from './api.service';
 import { PersonDetail } from '../models/PersonDetail'
+import { MovieSummary } from '../models/MovieSummary';
 
 let PersonService = class PersonService {
     constructor() {}
 
     getPersonDetail(id) {
-        console.log('get Person' + id);
         return new Promise( (resolve, reject) => {
             fetch(apiService.getPersonDetail(id)) 
                 .then( (response) => response.json() )
                 .then( (response) => {
                     let a = response;
-                    console.log(a);
                     let person = new PersonDetail(a.id, a.name, a.popularity, a.profile_path, a.birthday, a.deathday, a.place_of_birth, a.biography);
-                    console.log(person);
                     resolve(person);
                 })
                 .catch( (error) => {
@@ -30,6 +28,19 @@ let PersonService = class PersonService {
         });
     }
     
+    getPersonCredits(id) {
+        return new Promise( (resolve, reject) => {
+            fetch(apiService.getPersonCredits(id))
+                .then( (response) => response.json() )
+                .then( (response) => {
+                    let credits = [];
+                    response.cast.forEach( (element) => {
+                        credits.push(new MovieSummary(element.id, element.title, element.popularity, element.poster_path, element.backdrop_path, element.release_date, element.overview, element.character))
+                    })
+                    resolve(credits);
+                })
+        });
+    }
 };
 
 // Create a Singleton

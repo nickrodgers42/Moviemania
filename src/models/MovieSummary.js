@@ -3,7 +3,7 @@
  */
 
 export class MovieSummary {
-    constructor(id, title, popularity, posterPath, backdropPath, releaseDate, overview) {
+    constructor(id, title, popularity, posterPath, backdropPath, releaseDate, overview, character) {
         this.id = id;
         this.title = title;
         this.popularity = popularity;
@@ -11,5 +11,6 @@ export class MovieSummary {
         this.backdropPath = backdropPath;
         this.releaseDate = releaseDate;
         this.overview = overview;
+        this.character = character;
     }
 }

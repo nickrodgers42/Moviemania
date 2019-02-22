@@ -40,7 +40,7 @@ let MovieService = class MovieService {
                 .then(( response ) => {
                     let movies = [];
                     response.results.forEach(element => {
-                        movies.push(new MovieSummary(element.id, element.title, element.popularity, element.poster_path, element.backdrop_path, element.release_date, element.overview))
+                        movies.push(new MovieSummary(element.id, element.title, element.popularity, element.poster_path, element.backdrop_path, element.release_date, element.overview, null))
                     });
                     resolve(movies);
                 })
@@ -57,8 +57,8 @@ let MovieService = class MovieService {
                 .then(( response ) => response.json() )
                 .then(( response ) => {
                     let a = response;
-                    let movie = new MovieDetail(a.id, a.title, a.popularity, a.poster_path, a.backdrop_path, a.release_date, a.overview, a.genres, a.budget, a.revenue, a.status);
-                    console.log(movie);
+                    let movie = new MovieDetail(a.id, a.title, a.popularity, a.poster_path, a.backdrop_path, a.release_date, a.overview, null, a.genres, a.budget, a.revenue, a.status);
+                    (movie);
                     resolve(movie);
                 })
                 .catch(( error ) => {
@@ -87,15 +87,12 @@ let MovieService = class MovieService {
     }
 
     getPersonDetail(id) {
-        console.log('get Person' + id);
         return new Promise( (resolve, reject) => {
             fetch(apiService.getPersonDetail(id)) 
                 .then( (response) => response.json() )
                 .then( (response) => {
                     let a = response;
-                    console.log(a);
                     let person = PersonDetail(a.id, a.name, a.popularity, a.profilePath, a.birthday, a.deathday, a.place_of_birth, a.biography);
-                    console.log(person);
                     resolve(person);
                 })
                 .catch( (error) => {

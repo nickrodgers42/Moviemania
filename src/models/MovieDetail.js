@@ -5,8 +5,8 @@ import { Genre } from './Genre';
  */
 
 export class MovieDetail extends MovieSummary {
-    constructor(id, title, popularity, posterPath, backdropPath, releaseDate, overview, genres, budget, revenue, status) {
-        super(id, title, popularity, posterPath, backdropPath, releaseDate, overview);
+    constructor(id, title, popularity, posterPath, backdropPath, releaseDate, overview, character, genres, budget, revenue, status) {
+        super(id, title, popularity, posterPath, backdropPath, releaseDate, overview, character);
         tempGenres = [];
         genres.forEach(element => {
             tempGenres.push(new Genre(element.name, element.id))

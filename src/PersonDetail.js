@@ -32,6 +32,7 @@ import {
 } from 'native-base';
 import personService from './services/person.service';
 import CastCard from './CastCard';
+import MovieSummary from './MovieSummary';
 
 export default class PersonDetailPage extends Component {
         static navigationOptions = ({navigation}) => { 
@@ -44,7 +45,7 @@ export default class PersonDetailPage extends Component {
                         </Left>
                         <Body style={{flex: 3}}>
                             <Title>
-                                {navigation.getParam('actor', 'Actor Details').title}
+                                {navigation.getParam('actor', 'Actor Details')}
                             </Title>
                         </Body>
                         <Right />
@@ -57,6 +58,8 @@ export default class PersonDetailPage extends Component {
         this.state = {
             person: {},
             fetchedPerson: false,
+            credits: [],
+            fetchedCredits: false,
         }
     }
 
@@ -75,6 +78,16 @@ export default class PersonDetailPage extends Component {
             .catch( (error) => {
                 console.error(error);
             });
+        personService.getPersonCredits(this.props.navigation.getParam('actorId', ''))
+            .then( results => {
+                this.setState({
+                    fetchedCredits: true,
+                    credits: results
+                })
+            })
+            .catch( (error) => {
+                console.error(error);
+            });
     }
 
     formatDate(dateStr) {
@@ -83,6 +96,19 @@ export default class PersonDetailPage extends Component {
         day = dateStr.substring(8,10);
         return month + '/' + day + '/' + year.substring(2);
     }
+
+    _renderCreditItem = ({item}) => {
+        return(
+            <MovieSummary
+                navigation={this.props.navigation}
+                movie={item}
+                narrow={true}
+            />
+        )
+    }
+
+
+    _keyExtractor = (item, index) =>  item.id.toString();
 
     render() {
         let win = Dimensions.get('window');
@@ -122,6 +148,25 @@ export default class PersonDetailPage extends Component {
                                     }
                                 </Body>
                             </CardItem>
+                            <CardItem header>
+                                <Text>Credits</Text>
+                            </CardItem>
+                            {this.state.fetchedCredits ? 
+                                <CardItem>
+                                    <Body>
+                                        <FlatList
+                                            data={this.state.credits}
+                                            renderItem={this._renderCreditItem}
+                                            keyExtractor={this._keyExtractor}
+                                            contentContainerStyle={{ flexGrow: 1}}
+                                            horizontal={true}
+                                        >
+                                        </FlatList>
+                                    </Body>
+                                </CardItem>
+                            :
+                                null
+                            }
                         </Card>
                     :
                         null
