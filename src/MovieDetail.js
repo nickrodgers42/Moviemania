@@ -33,6 +33,7 @@ import {
 import movieService from './services/movie.service';
 import CastCard from './CastCard';
 import GenreList from './GenreList';
+import Styles from './Stylesheet';
 
 export default class MovieDetailPage extends Component {
         static navigationOptions = ({navigation}) => { 
@@ -43,7 +44,7 @@ export default class MovieDetailPage extends Component {
                                 <Icon name='arrow-back'></Icon>
                             </Button>
                         </Left>
-                        <Body style={{flex: 3}}>
+                        <Body style={Styles.headerBodyFlex}>
                             <Title>
                                 {navigation.getParam('movie', 'Movie Details').title}
                             </Title>
@@ -124,7 +125,7 @@ export default class MovieDetailPage extends Component {
                     <Card transparent>
                         <CardItem header>
                             <Body>
-                                <Text style={{fontSize: 32}}>
+                                <Text style={Styles.bigTitleFont}>
                                     {this.state.movie.title}
                                 </Text>
                                 <Text note>
@@ -136,20 +137,49 @@ export default class MovieDetailPage extends Component {
                             <Body>
                                 <Image 
                                     source={{uri: 'https://image.tmdb.org/t/p/w500/' + this.state.movie.posterPath}} 
-                                    style={{width: win.width-50, height: 350}} 
+                                    style={Styles.movieDetailImg} 
                                     resizeMode='contain'
                                 />
                             </Body>
                         </CardItem>
                         <CardItem>
                             <Body>
+                                <Text style={Styles.mediumTitleFont}>Overview</Text>
                                 <Text>{this.state.movie.overview}</Text>
-                                <Text>Release Date: {this.formatDate(this.state.movie.releaseDate)}</Text>
-                                <Text>Budget: ${this.state.movie.budget}</Text>
-                                <Text>Revenue: ${this.state.movie.revenue}</Text>
-                                <Text>Status: {this.state.movie.status}</Text>
                             </Body>
                         </CardItem>
+                        <CardItem>
+                            <Left>
+                                <Text>Release Date:</Text>
+                            </Left>
+                            <Right>
+                                <Text style={Styles.rightAlignText}>{this.formatDate(this.state.movie.releaseDate)}</Text>
+                            </Right>
+                        </CardItem>                                
+                        <CardItem>
+                            <Left>
+                                <Text>Budget:</Text>
+                            </Left>
+                            <Right>
+                                <Text style={Styles.rightAlignText}>${this.state.movie.budget}</Text>
+                            </Right>
+                        </CardItem>                        
+                        <CardItem>
+                            <Left>
+                                <Text>Revenue:</Text>
+                            </Left>
+                            <Right>
+                                <Text style={Styles.rightAlignText}>${this.state.movie.revenue}</Text>
+                            </Right>
+                        </CardItem>                        
+                        <CardItem>
+                            <Left>
+                                <Text>Status:</Text>
+                            </Left>
+                            <Right>
+                                <Text style={Styles.rightAlignText}>{this.state.movie.status}</Text>
+                            </Right>
+                        </CardItem>                        
                         <CardItem header>
                             <Text>Cast</Text>
                         </CardItem>
@@ -160,7 +190,7 @@ export default class MovieDetailPage extends Component {
                                         data={this.state.cast}
                                         renderItem={this._renderCastMember}
                                         keyExtractor={this._castKeyExtractor}
-                                        contentContainerStyle={{ flexGrow: 1 }}
+                                        contentContainerStyle={Styles.flatListContentContainer}
                                         horizontal={true}
                                     >
                                     </FlatList>

@@ -38,7 +38,7 @@ import {
 } from 'native-base';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import movieService from './services/movie.service';
-
+import Styles from './Stylesheet';
 
 export default class MovieSummary extends Component {
     constructor(props) {
@@ -69,16 +69,10 @@ export default class MovieSummary extends Component {
     render() {
         let win = Dimensions.get('window');
         let cardStyle={};
-        let imgStyle={width: win.width-50, height: 200, flex: 1}; 
+        let imgStyle=Styles.movieSummaryImage; 
         if (this.props.narrow) {
-            cardStyle={
-                width: win.width*0.85
-            }
-            imgStyle={
-                width: win.width*0.85 - 50,
-                height: 200,
-                flex: 1
-            }
+            cardStyle=Styles.movieSummaryCardNarrow
+            imgStyle=Styles.movieSummaryImageNarrow
         }
         return (
             <Card style={cardStyle}>
@@ -103,15 +97,19 @@ export default class MovieSummary extends Component {
                             style={imgStyle}
                             resizeMode='cover' 
                         />
-                        <Text style={{paddingTop: 20}}>{!this.state.readMore && this.props.movie.overview.length > 120 ? this.props.movie.overview.substring(0, 120) + '...'  : this.props.movie.overview}</Text>
+                    </Body>
+                </CardItem>
+                <CardItem>
+                    <Body>
+                        <Text>{!this.state.readMore && this.props.movie.overview.length > 120 ? this.props.movie.overview.substring(0, 120) + '...'  : this.props.movie.overview}</Text>
                         <Button small primary transparent onPress={() => this.readMore()}>
                         {!this.state.readMore && this.props.movie.overview.length > 120 ?
-                            <Text note style={{textAlign: 'auto', textDecorationLine: 'underline'}}>Read More</Text>
+                            <Text note style={Styles.readMoreText}>Read More</Text>
                         :
                             null
                         }
                         {this.state.readMore && this.props.movie.overview.length > 120 ?
-                            <Text note style={{textAlign: 'auto', textDecorationLine: 'underline'}}>Show Less</Text>
+                            <Text note style={Styles.readMoreText}>Show Less</Text>
                         :
                             null
                         }

@@ -34,7 +34,7 @@ import {
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import movieService from './services/movie.service';
 import MovieSummary from './MovieSummary';
-
+import Styles from './Stylesheet';
 
 export default class CategoryPage extends Component {
     static navigationOptions = ({navigation}) => { 
@@ -45,9 +45,9 @@ export default class CategoryPage extends Component {
                                 <Icon name='arrow-back'></Icon>
                             </Button>
                         </Left>
-                        <Body style={{flex: 3}}>
+                        <Body style={Styles.headerBodyFlex}>
                             <Title>
-                                 Search Results for '{navigation.getParam('query', '')}'
+                                 Search Results for '{navigation.getParam('query', '')}' 
                             </Title>
                         </Body>
                         <Right />
@@ -119,7 +119,7 @@ export default class CategoryPage extends Component {
                     data={this.state.movies}
                     renderItem={this._renderItem}
                     keyExtractor={this._keyExtractor}
-                    contentContainerStyle={{ flexGrow: 1 }}
+                    contentContainerStyle={Styles.flatListContentContainer}
                     onEndReached={() => this._getMovies()}
                     onEndReachedThreshold={0.5}
                 >

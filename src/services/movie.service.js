@@ -42,7 +42,11 @@ let MovieService = class MovieService {
                     response.results.forEach(element => {
                         movies.push(new MovieSummary(element.id, element.title, element.popularity, element.poster_path, element.backdrop_path, element.release_date, element.overview, null))
                     });
-                    resolve(movies);
+                    resolve({
+                        movies: movies,
+                        totalResults: response.total_results,
+                        totalPages: response.total_pages
+                    });
                 })
                 .catch((error) => {
                     console.error(error);

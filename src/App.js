@@ -12,7 +12,6 @@ import { createAppContainer, createBottomTabNavigator, createStackNavigator } fr
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import BrowsePage from './BrowsePage';
-import ScreenTwo from './ScreenTwo';
 import CategoryPage from './CategoryPage';
 import MovieSearchResults from './MovieSearchResults';
 import MovieDetailPage from './MovieDetail';

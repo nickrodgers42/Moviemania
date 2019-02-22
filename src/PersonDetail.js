@@ -33,6 +33,7 @@ import {
 import personService from './services/person.service';
 import CastCard from './CastCard';
 import MovieSummary from './MovieSummary';
+import Styles from './Stylesheet';
 
 export default class PersonDetailPage extends Component {
         static navigationOptions = ({navigation}) => { 
@@ -43,7 +44,7 @@ export default class PersonDetailPage extends Component {
                                 <Icon name='arrow-back'></Icon>
                             </Button>
                         </Left>
-                        <Body style={{flex: 3}}>
+                        <Body style={Styles.headerBodyFlex}>
                             <Title>
                                 {navigation.getParam('actor', 'Actor Details')}
                             </Title>
@@ -119,7 +120,7 @@ export default class PersonDetailPage extends Component {
                         <Card transparent>
                             <CardItem header>
                                 <Body>
-                                    <Text style={{fontSize: 32}}>
+                                    <Text style={Styles.bigTitleFont}>
                                         {this.state.person.name}
                                     </Text>
                                     <Text note>
@@ -131,23 +132,53 @@ export default class PersonDetailPage extends Component {
                                 <Body>
                                     <Image
                                         source={{uri: 'https://image.tmdb.org/t/p/w500' + this.state.person.profilePath}}
-                                        style={{width: win.width-50, height: 350}}
+                                        style={Styles.personDetailImage}
                                         resizeMode='contain'
                                     />
                                 </Body>
                             </CardItem>
                             <CardItem>
                                 <Body>
+                                    <Text style={Styles.mediumTitleFont}>Biography</Text> 
                                     <Text>{this.state.person.biography}</Text>
-                                    <Text>Born: {this.formatDate(this.state.person.birthDate)}</Text>
-                                    <Text>Birthplace: {this.state.person.placeOfBirth}</Text>
-                                    {this.state.deathdate != null ? 
-                                        <Text>Died: {this.state.person.deathDate}</Text>
-                                    :
-                                        null
-                                    }
                                 </Body>
                             </CardItem>
+                            <CardItem>
+                                <Left>
+                                    <Text>Born:</Text>
+                                </Left>
+                                <Right>
+                                    <Text style={Styles.rightAlignText}>{this.formatDate(this.state.person.birthDate)}</Text>
+                                </Right>
+                            </CardItem>
+                            <CardItem>
+                                <Left>
+                                    <Text>
+                                        Birthplace:
+                                    </Text>
+                                </Left>
+                                <Right>
+                                    <Text style={Styles.rightAlignText}>
+                                        {this.state.person.placeOfBirth}
+                                    </Text>
+                                </Right>
+                            </CardItem>
+                            {this.state.deathdate != null ? 
+                                <CardItem>
+                                    <Left>
+                                        <Text>
+                                            Died:
+                                        </Text>
+                                    </Left>
+                                    <Right>
+                                        <Text>
+                                            {this.state.person.deathDate}
+                                        </Text>
+                                    </Right>
+                                </CardItem>
+                            :
+                                null
+                            }
                             <CardItem header>
                                 <Text>Credits</Text>
                             </CardItem>
@@ -158,7 +189,7 @@ export default class PersonDetailPage extends Component {
                                             data={this.state.credits}
                                             renderItem={this._renderCreditItem}
                                             keyExtractor={this._keyExtractor}
-                                            contentContainerStyle={{ flexGrow: 1}}
+                                            contentContainerStyle={Styles.flatListContentContainer}
                                             horizontal={true}
                                         >
                                         </FlatList>

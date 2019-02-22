@@ -34,6 +34,7 @@ import {
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import personService from './services/person.service';
 import PersonCard from './PersonCard';
+import Styles from './Stylesheet';
 
 
 export default class CategoryPage extends Component {
@@ -45,7 +46,7 @@ export default class CategoryPage extends Component {
                                 <Icon name='arrow-back'></Icon>
                             </Button>
                         </Left>
-                        <Body style={{flex: 3}}>
+                        <Body style={Styles.headerBodyFlex}>
                             <Title>
                                  Search Results for '{navigation.getParam('query', '')}'
                             </Title>
@@ -119,7 +120,7 @@ export default class CategoryPage extends Component {
                     data={this.state.people}
                     renderItem={this._renderItem}
                     keyExtractor={this._keyExtractor}
-                    contentContainerStyle={{ flexGrow: 1 }}
+                    contentContainerStyle={Styles.flatListContentContainer}
                     onEndReached={() => this._getPeople()}
                     onEndReachedThreshold={0.5}
                 >

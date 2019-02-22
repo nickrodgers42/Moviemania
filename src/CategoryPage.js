@@ -34,7 +34,7 @@ import {
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import movieService from './services/movie.service';
 import MovieSummary from './MovieSummary';
-
+import Styles from './Stylesheet';
 
 export default class CategoryPage extends Component {
     static navigationOptions = ({navigation}) => { 
@@ -45,7 +45,7 @@ export default class CategoryPage extends Component {
                                 <Icon name='arrow-back'></Icon>
                             </Button>
                         </Left>
-                        <Body style={{flex: 3}}>
+                        <Body style={Styles.headerBodyFlex}>
                             <Title>
                                 Browse {navigation.getParam('genre', '') } Movies
                             </Title>
@@ -59,9 +59,11 @@ export default class CategoryPage extends Component {
         super(props);
         this.state = {
             movies: [],
-            page: 1
+            page: 1,
+            totalPages: 0,
+            totalResults: 0,
+            fetchedResults: false
         }
-        this.key = 0;
     }
 
     componentWillMount() {
@@ -69,16 +71,21 @@ export default class CategoryPage extends Component {
     }
 
     _getMovies() {
-         movieService.getMoviesByGenreId(this.state.page, this.props.navigation.getParam('genreId'))
-             .then(results => {
-                 this.setState({
-                     movies: this.state.movies.concat(results),
-                     page: this.state.page + 1
-                 });
-             })
-             .catch((error) => {
-                 console.error(error);
-             });
+        if (this.state.page <= this.state.totalPages || this.state.totalPages == 0) {
+            movieService.getMoviesByGenreId(this.state.page, this.props.navigation.getParam('genreId'))
+                .then(results => {
+                    this.setState({
+                        movies: this.state.movies.concat(results.movies),
+                        page: this.state.page + 1,
+                        totalPages: results.totalPages,
+                        totalResults: results.totalResults,
+                        fetchedResults: true
+                    });
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        }
     }
 
     _renderItem = ({ item }) => {
@@ -95,11 +102,18 @@ export default class CategoryPage extends Component {
     render() {
         return (
             <Container>
+                <Card>
+                    <CardItem>
+                        <Body>
+                            <Text>Found {this.state.totalResults} {this.props.navigation.getParam('genre', '')} Movies</Text>
+                        </Body>
+                    </CardItem>
+                </Card>
                 <FlatList
                     data={this.state.movies}
                     renderItem={this._renderItem}
                     keyExtractor={this._keyExtractor}
-                    contentContainerStyle={{ flexGrow: 1 }}
+                    contentContainerStyle={Styles.flatListContentContainer}
                     onEndReached={() => this._getMovies()}
                     onEndReachedThreshold={0.5}
                 >
